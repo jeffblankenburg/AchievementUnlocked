@@ -1,0 +1,33 @@
+{
+  "deploy_settings": {
+    "default": {
+      "skill_id": "amzn1.ask.skill.6ad376bc-7444-41f5-896d-542ccf8c97ca",
+      "was_cloned": false,
+      "merge": {},
+      "resources": {
+        "manifest": {
+          "eTag": "ac99b1523234a369dfd90bef9f847d91"
+        },
+        "interactionModel": {
+          "en-US": {
+            "eTag": "cf4f3ccad2fd4ea2715d9f5f1529ce08"
+          }
+        },
+        "lambda": [
+          {
+            "alexaUsage": [
+              "custom/default"
+            ],
+            "arn": "arn:aws:lambda:us-east-1:679180307287:function:ask-custom-AchievementUnlocked-default",
+            "awsRegion": "us-east-1",
+            "codeUri": "lambda/custom",
+            "functionName": "ask-custom-AchievementUnlocked-default",
+            "handler": "index.handler",
+            "revisionId": "469d245c-630e-4760-9b1b-a5e33158df29",
+            "runtime": "nodejs8.10"
+          }
+        ]
+      }
+    }
+  }
+}

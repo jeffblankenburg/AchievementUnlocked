@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "hello world",
+      "invocationName": "achievement unlocked",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
