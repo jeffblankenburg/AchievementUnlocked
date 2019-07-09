@@ -4,13 +4,15 @@
 const Alexa = require("ask-sdk-core");
 
 const AchievementSound = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>"
+var AchievementSpeech = "";
+var sessionCounter = 0;
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === "LaunchRequest";
   },
   handle(handlerInput) {
-    const speechText = AchievementSound + " Welcome to the Achievement Unlocked, you can say hello!";
+    const speechText = AchievementSpeech + " Welcome to Achievement Unlocked, you can say hello!";
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -41,7 +43,7 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent";
   },
   handle(handlerInput) {
-    const speechText = "You can say hello to me!";
+    const speechText = AchievementSpeech + "In this skill, you can try saying anything you want to try to unlock new achievements!";
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -84,6 +86,7 @@ const ErrorHandler = {
   },
   handle(handlerInput, error) {
     console.log(`Error handled: ${error.message}`);
+    console.log(`Error stack: ${error.stack}`);
 
     return handlerInput.responseBuilder
       .speak("Sorry, I can't understand the command. Please say again.")
@@ -92,8 +95,86 @@ const ErrorHandler = {
   },
 };
 
+function CheckForAchievements(handlerInput)
+{
+  CheckSessionAchievements(handlerInput);
+  CheckRequestAchievements(handlerInput);
+  CheckDeviceAchievements(handlerInput);
+  CheckIntentAchievements(handlerInput);
+}
+
+function CheckSessionAchievements(handlerInput)
+{
+  //STARTED FIRST SESSION.
+
+  //FIFTH SESSION.
+
+  //TENTH SESSION.
+
+  //TWENTY-FIFTH SESSION.
+
+  //FIFTIETH SESSION.
+
+  //ONE HUNDRETH SESSION.
+
+  //FIVE REQUESTS IN ONE SESSION.
+
+  //TEN REQUESTS IN ONE SESSION.
+
+  //TWENTY-FIVE REQUESTS IN ONE SESSION.
+
+  //FIFTY REQUESTS IN ONE SESSION.
+
+  //ONE HUNDRED REQUESTS IN ONE SESSION.
+}
+
+function CheckRequestAchievements(handlerInput)
+{
+  //FIVE TOTAL REQUESTS
+
+  //TEN TOTAL REQUESTS
+
+  //TWENTY-FIVE REQUESTS.
+
+  //FIFTY REQUESTS.
+
+  //ONE HUNDRED REQUESTS.
+
+  //FIVE HUNDRED REQUESTS.
+
+  //ONE THOUSAND REQUESTS.
+}
+
+function CheckDeviceAchievements(handlerInput)
+{
+  //SECOND DEVICE
+
+  //THIRD DEVICE
+
+  //FOUTH DEVICE
+
+  //FIFTH DEVICE
+
+  //TENTH DEVICE
+}
+
+function CheckIntentAchievements(handlerInput)
+{
+  if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent")
+  {
+    createAchievement("Achievement Unlocked: You asked for help.")
+  }
+}
+
+function createAchievement(speechText)
+{
+  AchievementSpeech += AchievementSound + speechText;
+  //TODO: RECORD THIS ACHIEVEMENT SOMEWHERE.
+}
+
 const RequestLog = {
   async process(handlerInput) {
+    CheckForAchievements(handlerInput);
     console.log("REQUEST ENVELOPE = " + JSON.stringify(handlerInput.requestEnvelope));
     return;
   }
