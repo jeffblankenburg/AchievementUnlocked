@@ -2,10 +2,14 @@
 /* eslint-disable  no-console */
 
 const Alexa = require("ask-sdk-core");
+const https = require('https');
+const Airtable = require('airtable');
+const dashbot = require('dashbot')(process.env.dashbot_key).alexa;
 
 const AchievementSound = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>"
 var AchievementSpeech = "";
 var AchievementCount = 0;
+var UserRecord = "";
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -223,19 +227,19 @@ function CheckSessionAchievements(handlerInput)
   }
 
   //FIVE REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 5) createAchievement("You talked with this skill five times in one session.");
+  if (sessionAttributes.requestCount >= 5) createAchievement(001, "You talked with this skill five times in one session.");
 
   //TEN REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 10) createAchievement("You talked with this skill ten times in one session.");
+  if (sessionAttributes.requestCount >= 10) createAchievement(002, "You talked with this skill ten times in one session.");
 
   //TWENTY-FIVE REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 25) createAchievement("You talked with this skill 25 times in one session.");
+  if (sessionAttributes.requestCount >= 25) createAchievement(003, "You talked with this skill 25 times in one session.");
 
   //FIFTY REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 50) createAchievement("You talked with this skill fifty times in one session.");
+  if (sessionAttributes.requestCount >= 50) createAchievement(004, "You talked with this skill fifty times in one session.");
 
   //ONE HUNDRED REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 100) createAchievement("You talked with this skill one hundred times in one session.");
+  if (sessionAttributes.requestCount >= 100) createAchievement(005, "You talked with this skill one hundred times in one session.");
 
   //STARTED FIRST SESSION.
 
@@ -286,23 +290,23 @@ function CheckIntentAchievements(handlerInput)
 {
   if (handlerInput.requestEnvelope.request.type === "IntentRequest") {
     if (1 === 2) {}
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.CancelIntent") createAchievement("You said cancel.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.FallbackIntent") createAchievement("You said something we didn't anticipate.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent") createAchievement("You asked for help.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOffIntent") createAchievement("You asked for the loop to be off.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOnIntent") createAchievement("You asked for the loop to be on.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.MoreIntent") createAchievement("You asked for more.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateHomeIntent") createAchievement("You asked to navigate home.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateSettingsIntent") createAchievement("You asked to navigate to settings.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NextIntent") createAchievement("You said next.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NoIntent") createAchievement("You said no.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageDownIntent") createAchievement("You said page down.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageUpIntent") createAchievement("You said page up.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PauseIntent") createAchievement("You said pause.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PreviousIntent") createAchievement("You said previous.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.RepeatIntent") createAchievement("You said repeat.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ResumeIntent") createAchievement("You said resume.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollDownIntent") createAchievement("You said scroll down.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.CancelIntent") createAchievement(006, "You said cancel.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.FallbackIntent") createAchievement(007, "You said something we didn't anticipate.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent") createAchievement(008, "You asked for help.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOffIntent") createAchievement(009, "You asked for the loop to be off.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOnIntent") createAchievement(010, "You asked for the loop to be on.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.MoreIntent") createAchievement(011, "You asked for more.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateHomeIntent") createAchievement(012, "You asked to navigate home.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateSettingsIntent") createAchievement(013, "You asked to navigate to settings.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NextIntent") createAchievement(014, "You said next.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NoIntent") createAchievement(015, "You said no.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageDownIntent") createAchievement(016, "You said page down.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageUpIntent") createAchievement(017, "You said page up.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PauseIntent") createAchievement(018, "You said pause.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PreviousIntent") createAchievement(019, "You said previous.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.RepeatIntent") createAchievement(020, "You said repeat.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ResumeIntent") createAchievement(021, "You said resume.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollDownIntent") createAchievement(022, "You said scroll down.");
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollLeftIntent") createAchievement("You said scroll left.");
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollRightIntent") createAchievement("You said scroll right.");
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollUpIntent") createAchievement("You said scroll up.");
@@ -325,24 +329,114 @@ function CheckIntentAchievements(handlerInput)
   }
 }
 
-function createAchievement(speechText)
+async function createAchievement(achievementId, speechText)
 {
-  console.log("CREATING ACHIEVEMENT");
-  AchievementSpeech += AchievementSound + "Achievement Unlocked: " + speechText + " ";
-  AchievementCount++;
-  //TODO: RECORD THIS ACHIEVEMENT SOMEWHERE.
+  if (IsAchievementIncomplete(achievementId)) {
+    console.log("CREATING ACHIEVEMENT");
+    AchievementSpeech += AchievementSound + "Achievement Unlocked: " + speechText + " ";
+    AchievementCount++;
+    //TODO: RECORD THIS ACHIEVEMENT SOMEWHERE.
+    var fieldName = getFieldName(achievementId);
+    var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
+    airtable('User').update(UserRecord.RecordId, {
+      [fieldName]: Date.now()
+      }, function(err, record) {
+          if (err) { console.error(err); return; }
+      });
+    UserRecord[fieldName] = Date.now();
+  }
+}
+
+function getFieldName(achievementId) {
+  var fieldName = "ACH";
+  if (achievementId < 10) fieldName += "00";
+  else if (achievementId < 100) fieldName += "0";
+  return fieldName + achievementId;
+}
+
+function IsAchievementIncomplete(achievementId) {
+  if (UserRecord[getFieldName(achievementId)] != undefined) return false;
+  else {
+    console.log("ACHIEVEMENT " + achievementId + " COMPLETED");
+    return true;
+  } 
 }
 
 function RemoveSounds()
 {
-  console.log("REMOVING SOUNDS BECAUSE THERE ARE MORE THAN FIVE ACHIEVEMENTS.")
+  console.log("REMOVING SOUNDS BECAUSE THERE ARE MORE THAN FIVE ACHIEVEMENTS.  SSML CAN'T HAVE MORE THAN 5 SOUND EFFECTS IN ONE RESPONSE.")
   AchievementSpeech = AchievementSpeech.split(AchievementSound).join("");
   AchievementSpeech = AchievementSound + AchievementSpeech;
+}
+
+async function GetUserRecord(userId)
+{
+  console.log("GETTING USER RECORD")
+  var filter = "&filterByFormula=%7BUserId%7D%3D%22" + encodeURIComponent(userId) + "%22";
+  const userRecord = await httpGet("appx5AkeU3qgwlYDn", filter, "User");
+  //IF THERE ISN'T A USER RECORD, CREATE ONE.
+  if (userRecord.records.length === 0){
+    console.log("CREATING NEW USER RECORD");
+    var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
+    return new Promise((resolve, reject) => {
+      airtable('User').create({"UserId": userId}, 
+                      function(err, record) {
+                              if (err) { console.error(err); return; }
+                              resolve(record);
+                          });
+                      });
+  }
+  else{
+    console.log("RETURNING FOUND USER RECORD = " + JSON.stringify(userRecord.records[0]));
+    return await userRecord.records[0];
+  }
+}
+
+function httpGet(base, filter, table = "User"){
+  //console.log("IN HTTP GET");
+  //console.log("BASE = " + base);
+  //console.log("FILTER = " + filter);
+  
+  var options = {
+      host: "api.airtable.com",
+      port: 443,
+      path: "/v0/" + base + "/" + table + "?api_key=" + process.env.airtable_key + filter,
+      method: 'GET',
+  };
+  
+  return new Promise(((resolve, reject) => {
+    const request = https.request(options, (response) => {
+      response.setEncoding('utf8');
+      let returnData = '';
+
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        return reject(new Error(`${response.statusCode}: ${response.req.getHeader('host')} ${response.req.path}`));
+      }
+      console.log("FULL PATH = http://" + options.host + options.path);
+      //console.log("HTTPS REQUEST OPTIONS = " + JSON.stringify(options));
+
+      response.on('data', (chunk) => {
+        returnData += chunk;
+      });
+
+      response.on('end', () => {
+        resolve(JSON.parse(returnData));
+      });
+
+      response.on('error', (error) => {
+        reject(error);
+      });
+    });
+    request.end();
+  }));
 }
 
 const RequestLog = {
   async process(handlerInput) {
     console.log("REQUEST ENVELOPE = " + JSON.stringify(handlerInput.requestEnvelope));
+    var userRecord = await GetUserRecord(handlerInput.requestEnvelope.session.user.userId);
+    await console.log("USER RECORD = " + JSON.stringify(userRecord.fields));
+    UserRecord = userRecord.fields;
     CheckForAchievements(handlerInput);
     return;
   }
@@ -356,7 +450,7 @@ const ResponseLog = {
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
-exports.handler = skillBuilder
+exports.handler = dashbot.handler(skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
     AmazonActorIntentHandler,
@@ -377,4 +471,5 @@ exports.handler = skillBuilder
   .addErrorHandlers(ErrorHandler)
   .addRequestInterceptors(RequestLog)
   .addResponseInterceptors(ResponseLog)
-  .lambda();
+  .withApiClient(new Alexa.DefaultApiClient())
+  .lambda());

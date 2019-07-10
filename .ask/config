@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-AchievementUnlocked-default",
             "handler": "index.handler",
-            "revisionId": "18e0dd6c-ade3-4851-aac8-2f21e1cc8c1f",
+            "revisionId": "c5496f0f-681f-41a8-b801-466661659f9f",
             "runtime": "nodejs8.10"
           }
         ]
