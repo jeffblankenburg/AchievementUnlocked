@@ -19,8 +19,8 @@ const LaunchRequestHandler = {
     const speechText = AchievementSpeech + " Welcome to Achievement Unlocked!  There are over 500 different achievements you can collect in this game.";
 
     return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
+      .speak(setVoice(speechText))
+      .reprompt(setVoice(speechText))
       .getResponse();
   },
 };
@@ -34,77 +34,68 @@ const HelloWorldIntentHandler = {
     const speechText = AchievementSpeech + " Hello World!";
 
     return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
+      .speak(setVoice(speechText))
+      .reprompt(setVoice(speechText))
       //.withSimpleCard("Hello World", speechText)
       .getResponse();
   },
 };
-
 const AmazonActorIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonActorIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " What is your favorite thing that " + handlerInput.requestEnvelope.request.intent.slots.actor.value + " has been in?";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonAdministrativeAreaIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " Have you ever been to " + handlerInput.requestEnvelope.request.intent.slots.administrativearea.value + "?  It's one of my favorite places.";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonAirlineIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " I tend to avoid flying on airlines like " + handlerInput.requestEnvelope.request.intent.slots.airline.value + ".  I prefer to drive on the information superhighway.";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonAirportIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " I've never been to the " + handlerInput.requestEnvelope.request.intent.slots.airport.value + " airport. What's your favorite restaurant there?";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonAnimalIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAnimalIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " Have you ever seen a " + handlerInput.requestEnvelope.request.intent.slots.animal.value + "?  Do you know where they are from?";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonArtistIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonArtistIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " What is your favorite thing that " + handlerInput.requestEnvelope.request.intent.slots.artist.value + " created? I'm still learning to appreciate their work.";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonAthleteIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAthleteIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " I can't remember what team " + handlerInput.requestEnvelope.request.intent.slots.athlete.value + " played for. Do you know?";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonAuthorIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAuthorIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + " What is your favorite thing that " + handlerInput.requestEnvelope.request.intent.slots.author.value + " has written?";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 const AmazonBookIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonBookIntent"; },
   handle(handlerInput) {
@@ -117,10 +108,9 @@ const HelpIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + "In this skill, you can try saying anything you want to try to unlock new achievements!";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
-
 
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
@@ -132,10 +122,39 @@ const CancelAndStopIntentHandler = {
     const speechText = AchievementSpeech + " If you are trying to actually leave this skill, say quit.";
 
     return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
+      .speak(setVoice(speechText))
+      .reprompt(setVoice(speechText))
       .getResponse();
   },
+};
+
+const ChangeVoiceIntentHandler = {
+  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "ChangeVoiceIntent"; },
+  async handle(handlerInput) {
+    var name = handlerInput.requestEnvelope.request.intent.slots.voice.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+    var language = handlerInput.requestEnvelope.request.intent.slots.voice.resolutions.resolutionsPerAuthority[0].values[0].value.id.slice(0,5);
+
+    if (name === "Alexa") {
+      name = "";
+      language = "";
+    }
+
+    UserRecord.Voice = name;
+    UserRecord.Language = language;
+
+    var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
+    airtable('User').update(UserRecord.RecordId, {
+      Voice: name,
+      Language: language
+      }, function(err, record) {
+          if (err) { console.error(err); return; }
+      });
+
+    if ((name === undefined) || (name === "")) name = "Alexa";
+
+    const speechText = AchievementSpeech + "There are twenty-seven different Polly voices, and you chose " + name + "?  That's an interesting choice. What else are you going to try?";
+    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
+  }
 };
 
 const UnusedIntentHandler = {
@@ -170,8 +189,8 @@ const UnusedIntentHandler = {
     const speechText = AchievementSpeech + " Which achievement will you go for next?";
 
     return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
+      .speak(setVoice(speechText))
+      .reprompt(setVoice(speechText))
       .getResponse();
   },
 };
@@ -195,12 +214,21 @@ const ErrorHandler = {
     console.log(`Error handled: ${error.message}`);
     console.log(`Error stack: ${error.stack}`);
 
+    var speechText = "Sorry.  Something went wrong.  Try something else.";
+
     return handlerInput.responseBuilder
-      .speak("Sorry, I can't understand the command. Please say again.")
-      .reprompt("Sorry, I can't understand the command. Please say again.")
+      .speak(setVoice(speechText))
+      .reprompt(setVoice(speechText))
       .getResponse();
   },
 };
+
+function setVoice(speechText) {
+  if ((UserRecord.Voice != undefined) && (UserRecord.Voice != "")){
+    return "<voice name='" + UserRecord.Voice + "'><lang xml:lang='" + UserRecord.Language + "'>" + speechText + "</lang></voice>";
+  }
+  else return speechText;
+}
 
 function CheckForAchievements(handlerInput)
 {
@@ -307,25 +335,25 @@ function CheckIntentAchievements(handlerInput)
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.RepeatIntent") createAchievement(020, "You said repeat.");
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ResumeIntent") createAchievement(021, "You said resume.");
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollDownIntent") createAchievement(022, "You said scroll down.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollLeftIntent") createAchievement("You said scroll left.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollRightIntent") createAchievement("You said scroll right.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollUpIntent") createAchievement("You said scroll up.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.SelectIntent") createAchievement("You said select.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOffIntent") createAchievement("You said shuffle off.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOnIntent") createAchievement("You said shuffle on.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StartOverIntent") createAchievement("You said start over.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StopIntent") createAchievement("You said stop.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.YesIntent") createAchievement("You said yes.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollLeftIntent") createAchievement(023, "You said scroll left.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollRightIntent") createAchievement(024, "You said scroll right.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollUpIntent") createAchievement(025, "You said scroll up.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.SelectIntent") createAchievement(026, "You said select.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOffIntent") createAchievement(027, "You said shuffle off.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOnIntent") createAchievement(028, "You said shuffle on.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StartOverIntent") createAchievement(029, "You said start over.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StopIntent") createAchievement(030, "You said stop.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.YesIntent") createAchievement(031, "You said yes.");
 
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonActorIntent") createAchievement("You said the name of an actor.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent") createAchievement("You said the name of an administrative area.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent") createAchievement("You said the name of an airline.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent") createAchievement("You said the name of an airport.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAnimalIntent") createAchievement("You said the name of an animal.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonArtistIntent") createAchievement("You said the name of an artist.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAthleteIntent") createAchievement("You said the name of an athlete.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAuthorIntent") createAchievement("You said the name of an author.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonBookIntent") createAchievement("You said the name of a book.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonActorIntent") createAchievement(032, "You said the name of an actor.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent") createAchievement(033, "You said the name of an administrative area.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent") createAchievement(034, "You said the name of an airline.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent") createAchievement(035, "You said the name of an airport.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAnimalIntent") createAchievement(036, "You said the name of an animal.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonArtistIntent") createAchievement(037, "You said the name of an artist.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAthleteIntent") createAchievement(038, "You said the name of an athlete.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAuthorIntent") createAchievement(039, "You said the name of an author.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonBookIntent") createAchievement(040, "You said the name of a book.");
   }
 }
 
@@ -337,14 +365,17 @@ async function createAchievement(achievementId, speechText)
     AchievementCount++;
     //TODO: RECORD THIS ACHIEVEMENT SOMEWHERE.
     var fieldName = getFieldName(achievementId);
+    UserRecord[fieldName] = Date.now();
+    UserRecord.Score++;
     var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
     airtable('User').update(UserRecord.RecordId, {
-      [fieldName]: Date.now()
+      [fieldName]: Date.now(),
+      Score: UserRecord.Score
       }, function(err, record) {
           if (err) { console.error(err); return; }
       });
-    UserRecord[fieldName] = Date.now();
   }
+  else console.log("USER HAS ALREADY COMPLETED THIS ACHIEVEMENT.");
 }
 
 function getFieldName(achievementId) {
@@ -462,6 +493,7 @@ exports.handler = dashbot.handler(skillBuilder
     AmazonAthleteIntentHandler,
     AmazonAuthorIntentHandler,
     AmazonBookIntentHandler,
+    ChangeVoiceIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,

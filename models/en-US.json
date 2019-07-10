@@ -221,9 +221,206 @@
               "samples": [
                   "{book}"
               ]
-            }
+            },
+            {
+              "name": "ChangeVoiceIntent",
+              "slots": [
+                  {
+                      "name": "voice",
+                      "type": "Voice"
+                  }
+              ],
+              "samples": [
+                  "use polly voice {voice}",
+                  "switch voice to {voice}",
+                  "switch to {voice}",
+                  "change to {voice}",
+                  "change voice to {voice}",
+                  "{voice}"
+              ]
+          }
           ],
-          "types": []
+          "types": [
+            {
+                "name": "Voice",
+                "values": [
+                    {
+                        "id": "fr-FR-0",
+                        "name": {
+                            "value": "Mathieu"
+                        }
+                    },
+                    {
+                        "id": "fr-FR-1",
+                        "name": {
+                            "value": "Lea"
+                        }
+                    },
+                    {
+                        "id": "fr-FR-2",
+                        "name": {
+                            "value": "Celine"
+                        }
+                    },
+                    {
+                        "id": "ja-JP-0",
+                        "name": {
+                            "value": "Takumi"
+                        }
+                    },
+                    {
+                        "id": "ja-JP-1",
+                        "name": {
+                            "value": "Mizuki"
+                        }
+                    },
+                    {
+                        "id": "it-IT-0",
+                        "name": {
+                            "value": "Giorgio"
+                        }
+                    },
+                    {
+                        "id": "it-IT-1",
+                        "name": {
+                            "value": "Carla"
+                        }
+                    },
+                    {
+                        "id": "es-ES-0",
+                        "name": {
+                            "value": "Enrique"
+                        }
+                    },
+                    {
+                        "id": "es-ES-1",
+                        "name": {
+                            "value": "Conchita"
+                        }
+                    },
+                    {
+                        "id": "de-DE-0",
+                        "name": {
+                            "value": "Vicki",
+                            "synonyms": [
+                                "vicky"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "de-DE-1",
+                        "name": {
+                            "value": "Marlene"
+                        }
+                    },
+                    {
+                        "id": "de-DE-2",
+                        "name": {
+                            "value": "Hans"
+                        }
+                    },
+                    {
+                        "id": "en-IN-0",
+                        "name": {
+                            "value": "Raveena"
+                        }
+                    },
+                    {
+                        "id": "en-IN-1",
+                        "name": {
+                            "value": "Aditi"
+                        }
+                    },
+                    {
+                        "id": "en-GB-0",
+                        "name": {
+                            "value": "Emma"
+                        }
+                    },
+                    {
+                        "id": "en-GB-1",
+                        "name": {
+                            "value": "Brian"
+                        }
+                    },
+                    {
+                        "id": "en-GB-2",
+                        "name": {
+                            "value": "Amy"
+                        }
+                    },
+                    {
+                        "id": "en-AU-0",
+                        "name": {
+                            "value": "Russell"
+                        }
+                    },
+                    {
+                        "id": "en-AU-1",
+                        "name": {
+                            "value": "Nicole"
+                        }
+                    },
+                    {
+                        "id": "en-US-0",
+                        "name": {
+                            "value": "Salli",
+                            "synonyms": [
+                                "sally"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "en-US-1",
+                        "name": {
+                            "value": "Matthew"
+                        }
+                    },
+                    {
+                        "id": "en-US-2",
+                        "name": {
+                            "value": "Kimberly"
+                        }
+                    },
+                    {
+                        "id": "en-US-3",
+                        "name": {
+                            "value": "Kendra"
+                        }
+                    },
+                    {
+                        "id": "en-US-4",
+                        "name": {
+                            "value": "Justin"
+                        }
+                    },
+                    {
+                        "id": "en-US-5",
+                        "name": {
+                            "value": "Joey"
+                        }
+                    },
+                    {
+                        "id": "en-US-6",
+                        "name": {
+                            "value": "Joanna"
+                        }
+                    },
+                    {
+                        "id": "en-US-7",
+                        "name": {
+                            "value": "Ivy"
+                        }
+                    },
+                    {
+                      "id": "",
+                      "name": {
+                          "value": "Alexa"
+                      }
+                  }
+                ]
+              }
+            ]
       }
   }
 }
