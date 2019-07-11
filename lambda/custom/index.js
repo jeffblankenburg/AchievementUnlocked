@@ -16,7 +16,7 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === "LaunchRequest";
   },
   handle(handlerInput) {
-    const speechText = AchievementSpeech + " Welcome to Achievement Unlocked!  There are over 500 different achievements you can collect in this game.";
+    const speechText = AchievementSpeech + " Welcome to Achievement Unlocked!  There are over 500 different achievements you can collect in this game.  You have already completed " + UserRecord.Score + " of them.  What will you try next?";
 
     return handlerInput.responseBuilder
       .speak(setVoice(speechText))
@@ -107,7 +107,7 @@ const AmazonBookIntentHandler = {
 const HelpIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent"; },
   handle(handlerInput) {
-    const speechText = AchievementSpeech + "In this skill, you can try saying anything you want to try to unlock new achievements!";
+    const speechText = AchievementSpeech + "In this skill, you can try saying anything you want. Try to unlock new achievements!";
     return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
   }
 };
@@ -119,7 +119,7 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === "AMAZON.StopIntent");
   },
   handle(handlerInput) {
-    const speechText = AchievementSpeech + " If you are trying to actually leave this skill, say quit.";
+    const speechText = AchievementSpeech + " If you are actually trying to leave this skill, say quit.";
 
     return handlerInput.responseBuilder
       .speak(setVoice(speechText))
@@ -230,8 +230,7 @@ function setVoice(speechText) {
   else return speechText;
 }
 
-function CheckForAchievements(handlerInput)
-{
+function CheckForAchievements(handlerInput) {
   console.log("CHECKING FOR ACHIEVEMENTS");
   AchievementSpeech = "";
   AchievementCount = 0;
@@ -240,6 +239,32 @@ function CheckForAchievements(handlerInput)
   CheckDeviceAchievements(handlerInput);
   CheckIntentAchievements(handlerInput);
   if (AchievementCount > 5) RemoveSounds(handlerInput)
+}
+
+async function IncrementSessionCount(handlerInput) {
+  if (handlerInput.requestEnvelope.session.new === true) {
+    console.log("INCREMENTING SESSION COUNT FROM " + UserRecord.SessionCount + " TO " + (parseInt(UserRecord.SessionCount) + 1));
+    UserRecord.SessionCount++;
+
+    var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
+    airtable('User').update(UserRecord.RecordId, {
+      SessionCount: UserRecord.SessionCount
+      }, function(err, record) {
+          if (err) { console.error(err); return; }
+      });
+  }
+}
+
+async function IncrementInteractionCount() {
+  console.log("INCREMENTING INTERACTION COUNT FROM " + UserRecord.InteractionCount + " TO " + (parseInt(UserRecord.InteractionCount) + 1));
+  UserRecord.InteractionCount++;
+
+  var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
+  airtable('User').update(UserRecord.RecordId, {
+    InteractionCount: UserRecord.InteractionCount
+    }, function(err, record) {
+        if (err) { console.error(err); return; }
+    });
 }
 
 function CheckSessionAchievements(handlerInput)
@@ -270,34 +295,60 @@ function CheckSessionAchievements(handlerInput)
   if (sessionAttributes.requestCount >= 100) createAchievement(005, "You talked with this skill one hundred times in one session.");
 
   //STARTED FIRST SESSION.
+  if (UserRecord.SessionCount >= 1) createAchievement(049, "You opened this skill for the first time!");
 
   //FIFTH SESSION.
+  if (UserRecord.SessionCount >= 5) createAchievement(050, "You opened this skill for the fifth time!");
 
   //TENTH SESSION.
+  if (UserRecord.SessionCount >= 10) createAchievement(051, "You opened this skill for the tenth time!");
 
   //TWENTY-FIFTH SESSION.
+  if (UserRecord.SessionCount >= 25) createAchievement(052, "You opened this skill for the twenty-fifth time!");
 
   //FIFTIETH SESSION.
+  if (UserRecord.SessionCount >= 50) createAchievement(053, "You opened this skill for the fiftieth time!");
 
   //ONE HUNDRETH SESSION.
+  if (UserRecord.SessionCount >= 100) createAchievement(054, "You opened this skill for the one hundreth time! Congratulations!");
+
+  //USER LET THE SKILL TIME OUT.
 }
 
 function CheckRequestAchievements(handlerInput)
 {
   console.log("CHECKING REQUEST ACHIEVEMENTS");
+  //FIRST REQUEST
+  if (UserRecord.InteractionCount >= 2) createAchievement(041, "You just had your first interaction with this skill. <say-as interpret-as='interjection'>booya</say-as>!");
+
   //FIVE TOTAL REQUESTS
+  if (UserRecord.InteractionCount >= 5) createAchievement(042, "You just said something to this skill for the fifth time!");
 
   //TEN TOTAL REQUESTS
+  if (UserRecord.InteractionCount >= 10) createAchievement(043, "You just said something to this skill for the tenth time!");
 
   //TWENTY-FIVE REQUESTS.
+  if (UserRecord.InteractionCount >= 25) createAchievement(044, "You just said something to this skill for the twenty-fifth time!");
 
   //FIFTY REQUESTS.
+  if (UserRecord.InteractionCount >= 50) createAchievement(045, "You just said something to this skill for the fiftieth time!");
 
   //ONE HUNDRED REQUESTS.
+  if (UserRecord.InteractionCount >= 100) createAchievement(046, "You just said something to this skill for the one hundreth time!");
 
   //FIVE HUNDRED REQUESTS.
+  if (UserRecord.InteractionCount >= 500) createAchievement(047, "You just said something to this skill for the five hundreth time!");
 
   //ONE THOUSAND REQUESTS.
+  if (UserRecord.InteractionCount >= 1000) createAchievement(048, "You just said something to this skill for the one thousandth time!  Congratulations!");
+
+  //MORNING
+
+  //AFTERNOON
+
+  //EVENING
+
+  //SPECIFIC LOCALES
 }
 
 function CheckDeviceAchievements(handlerInput)
@@ -312,6 +363,12 @@ function CheckDeviceAchievements(handlerInput)
   //FIFTH DEVICE
 
   //TENTH DEVICE
+
+  //RECTANGULAR SCREEN
+
+  //ROUND SCREEN
+  
+  //NO SCREEN
 }
 
 function CheckIntentAchievements(handlerInput)
@@ -375,7 +432,7 @@ async function createAchievement(achievementId, speechText)
           if (err) { console.error(err); return; }
       });
   }
-  else console.log("USER HAS ALREADY COMPLETED THIS ACHIEVEMENT.");
+  else console.log("USER HAS ALREADY COMPLETED ACHIEVEMENT " + getFieldName(achievementId) + ".");
 }
 
 function getFieldName(achievementId) {
@@ -410,12 +467,12 @@ async function GetUserRecord(userId)
     console.log("CREATING NEW USER RECORD");
     var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
     return new Promise((resolve, reject) => {
-      airtable('User').create({"UserId": userId}, 
-                      function(err, record) {
-                              if (err) { console.error(err); return; }
-                              resolve(record);
-                          });
-                      });
+    airtable('User').create({"UserId": userId, "Score":0, "SessionCount":0, "InteractionCount":0}, 
+                    function(err, record) {
+                            if (err) { console.error(err); return; }
+                            resolve(record);
+                        });
+                    });
   }
   else{
     console.log("RETURNING FOUND USER RECORD = " + JSON.stringify(userRecord.records[0]));
@@ -423,7 +480,7 @@ async function GetUserRecord(userId)
   }
 }
 
-function httpGet(base, filter, table = "User"){
+function httpGet(base, filter, table = "Data"){
   //console.log("IN HTTP GET");
   //console.log("BASE = " + base);
   //console.log("FILTER = " + filter);
@@ -468,6 +525,8 @@ const RequestLog = {
     var userRecord = await GetUserRecord(handlerInput.requestEnvelope.session.user.userId);
     await console.log("USER RECORD = " + JSON.stringify(userRecord.fields));
     UserRecord = userRecord.fields;
+    await IncrementInteractionCount();
+    await IncrementSessionCount(handlerInput);
     CheckForAchievements(handlerInput);
     return;
   }
