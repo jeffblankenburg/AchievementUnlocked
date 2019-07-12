@@ -8,6 +8,7 @@ const dashbot = require('dashbot')(process.env.dashbot_key).alexa;
 
 const AchievementSound = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>"
 var AchievementSpeech = "";
+var AchievementCardText = "";  //TODO: WRITE A CARD WHEN THEY GET ANY ACHIEVEMENTS.
 var AchievementCount = 0;
 var UserRecord = "";
 
@@ -18,10 +19,9 @@ const LaunchRequestHandler = {
   handle(handlerInput) {
     const speechText = AchievementSpeech + " Welcome to Achievement Unlocked!  There are over 500 different achievements you can collect in this game.  You have already completed " + UserRecord.Score + " of them.  What will you try next?";
 
-    return handlerInput.responseBuilder
-      .speak(setVoice(speechText))
-      .reprompt(setVoice(speechText))
-      .getResponse();
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
   },
 };
 
@@ -33,82 +33,20 @@ const HelloWorldIntentHandler = {
   handle(handlerInput) {
     const speechText = AchievementSpeech + " Hello World!";
 
-    return handlerInput.responseBuilder
-      .speak(setVoice(speechText))
-      .reprompt(setVoice(speechText))
-      //.withSimpleCard("Hello World", speechText)
-      .getResponse();
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
   },
-};
-const AmazonActorIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonActorIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " What is your favorite thing that " + handlerInput.requestEnvelope.request.intent.slots.actor.value + " has been in?";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonAdministrativeAreaIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " Have you ever been to " + handlerInput.requestEnvelope.request.intent.slots.administrativearea.value + "?  It's one of my favorite places.";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonAirlineIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " I tend to avoid flying on airlines like " + handlerInput.requestEnvelope.request.intent.slots.airline.value + ".  I prefer to drive on the information superhighway.";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonAirportIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " I've never been to the " + handlerInput.requestEnvelope.request.intent.slots.airport.value + " airport. What's your favorite restaurant there?";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonAnimalIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAnimalIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " Have you ever seen a " + handlerInput.requestEnvelope.request.intent.slots.animal.value + "?  Do you know where they are from?";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonArtistIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonArtistIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " What is your favorite thing that " + handlerInput.requestEnvelope.request.intent.slots.artist.value + " created? I'm still learning to appreciate their work.";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonAthleteIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAthleteIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " I can't remember what team " + handlerInput.requestEnvelope.request.intent.slots.athlete.value + " played for. Do you know?";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonAuthorIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonAuthorIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " What is your favorite thing that " + handlerInput.requestEnvelope.request.intent.slots.author.value + " has written?";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
-  }
-};
-const AmazonBookIntentHandler = {
-  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AmazonBookIntent"; },
-  handle(handlerInput) {
-    const speechText = AchievementSpeech + " " + handlerInput.requestEnvelope.request.intent.slots.book.value + " is one of my favorite books, but I can't remember the name of the author.  Do you happen to know who wrote it?";
-    return handlerInput.responseBuilder.speak(speechText).reprompt(speechText).getResponse();
-  }
 };
 
 const HelpIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + "In this skill, you can try saying anything you want. Try to unlock new achievements!";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
+    
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
   }
 };
 
@@ -121,10 +59,19 @@ const CancelAndStopIntentHandler = {
   handle(handlerInput) {
     const speechText = AchievementSpeech + " If you are actually trying to leave this skill, say quit.";
 
-    return handlerInput.responseBuilder
-      .speak(setVoice(speechText))
-      .reprompt(setVoice(speechText))
-      .getResponse();
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
+  },
+};
+
+const SessionEndedRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === "SessionEndedRequest";
+  },
+  handle(handlerInput) {
+    console.log("SESSION ENDED REQUEST. '" + handlerInput.requestEnvelope.request.reason + "'");
+    return handlerInput.responseBuilder.getResponse();
   },
 };
 
@@ -153,7 +100,10 @@ const ChangeVoiceIntentHandler = {
     if ((name === undefined) || (name === "")) name = "Alexa";
 
     const speechText = AchievementSpeech + "There are twenty-seven different Polly voices, and you chose " + name + "?  That's an interesting choice. What else are you going to try?";
-    return handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText)).getResponse();
+    
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
   }
 };
 
@@ -188,20 +138,8 @@ const UnusedIntentHandler = {
   handle(handlerInput) {
     const speechText = AchievementSpeech + " Which achievement will you go for next?";
 
-    return handlerInput.responseBuilder
-      .speak(setVoice(speechText))
-      .reprompt(setVoice(speechText))
-      .getResponse();
-  },
-};
-
-const SessionEndedRequestHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === "SessionEndedRequest";
-  },
-  handle(handlerInput) {
-    console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
-
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
     return handlerInput.responseBuilder.getResponse();
   },
 };
@@ -216,10 +154,9 @@ const ErrorHandler = {
 
     var speechText = "Sorry.  Something went wrong.  Try something else.";
 
-    return handlerInput.responseBuilder
-      .speak(setVoice(speechText))
-      .reprompt(setVoice(speechText))
-      .getResponse();
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
   },
 };
 
@@ -272,45 +209,41 @@ function CheckSessionAchievements(handlerInput)
   console.log("CHECKING SESSION ACHIEVEMENTS");
   const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
-  if (handlerInput.requestEnvelope.session.new === true) {
-    sessionAttributes.requestCount = 1;
-  }
-  else {
-    sessionAttributes.requestCount++;
-  }
+  if (handlerInput.requestEnvelope.session.new === true) sessionAttributes.requestCount = 1;
+  else sessionAttributes.requestCount++;
 
   //FIVE REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 5) createAchievement(001, "You talked with this skill five times in one session.");
+  if (sessionAttributes.requestCount >= 5) createAchievement(1, "You talked with this skill five times in one session.");
 
   //TEN REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 10) createAchievement(002, "You talked with this skill ten times in one session.");
+  if (sessionAttributes.requestCount >= 10) createAchievement(2, "You talked with this skill ten times in one session.");
 
   //TWENTY-FIVE REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 25) createAchievement(003, "You talked with this skill 25 times in one session.");
+  if (sessionAttributes.requestCount >= 25) createAchievement(3, "You talked with this skill 25 times in one session.");
 
   //FIFTY REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 50) createAchievement(004, "You talked with this skill fifty times in one session.");
+  if (sessionAttributes.requestCount >= 50) createAchievement(4, "You talked with this skill fifty times in one session.");
 
   //ONE HUNDRED REQUESTS IN ONE SESSION.
-  if (sessionAttributes.requestCount >= 100) createAchievement(005, "You talked with this skill one hundred times in one session.");
+  if (sessionAttributes.requestCount >= 100) createAchievement(5, "You talked with this skill one hundred times in one session.");
 
   //STARTED FIRST SESSION.
-  if (UserRecord.SessionCount >= 1) createAchievement(049, "You opened this skill for the first time!");
+  if (UserRecord.SessionCount >= 1) createAchievement(49, "You opened this skill for the first time!");
 
   //FIFTH SESSION.
-  if (UserRecord.SessionCount >= 5) createAchievement(050, "You opened this skill for the fifth time!");
+  if (UserRecord.SessionCount >= 5) createAchievement(50, "You opened this skill for the fifth time!");
 
   //TENTH SESSION.
-  if (UserRecord.SessionCount >= 10) createAchievement(051, "You opened this skill for the tenth time!");
+  if (UserRecord.SessionCount >= 10) createAchievement(51, "You opened this skill for the tenth time!");
 
   //TWENTY-FIFTH SESSION.
-  if (UserRecord.SessionCount >= 25) createAchievement(052, "You opened this skill for the twenty-fifth time!");
+  if (UserRecord.SessionCount >= 25) createAchievement(52, "You opened this skill for the twenty-fifth time!");
 
   //FIFTIETH SESSION.
-  if (UserRecord.SessionCount >= 50) createAchievement(053, "You opened this skill for the fiftieth time!");
+  if (UserRecord.SessionCount >= 50) createAchievement(53, "You opened this skill for the fiftieth time!");
 
   //ONE HUNDRETH SESSION.
-  if (UserRecord.SessionCount >= 100) createAchievement(054, "You opened this skill for the one hundreth time! Congratulations!");
+  if (UserRecord.SessionCount >= 100) createAchievement(54, "You opened this skill for the one hundreth time! Congratulations!");
 
   //USER LET THE SKILL TIME OUT.
 }
@@ -319,28 +252,31 @@ function CheckRequestAchievements(handlerInput)
 {
   console.log("CHECKING REQUEST ACHIEVEMENTS");
   //FIRST REQUEST
-  if (UserRecord.InteractionCount >= 2) createAchievement(041, "You just had your first interaction with this skill. <say-as interpret-as='interjection'>booya</say-as>!");
+  //if (UserRecord.InteractionCount >= 1) createAchievement(41, "You just had your first interaction with this skill. <say-as interpret-as='interjection'>booya</say-as>!");
 
   //FIVE TOTAL REQUESTS
-  if (UserRecord.InteractionCount >= 5) createAchievement(042, "You just said something to this skill for the fifth time!");
+  if (UserRecord.InteractionCount >= 5) createAchievement(42, "You just said something to this skill for the fifth time!");
 
   //TEN TOTAL REQUESTS
-  if (UserRecord.InteractionCount >= 10) createAchievement(043, "You just said something to this skill for the tenth time!");
+  if (UserRecord.InteractionCount >= 10) createAchievement(43, "You just said something to this skill for the tenth time!");
 
   //TWENTY-FIVE REQUESTS.
-  if (UserRecord.InteractionCount >= 25) createAchievement(044, "You just said something to this skill for the twenty-fifth time!");
+  if (UserRecord.InteractionCount >= 25) createAchievement(44, "You just said something to this skill for the twenty-fifth time!");
 
   //FIFTY REQUESTS.
-  if (UserRecord.InteractionCount >= 50) createAchievement(045, "You just said something to this skill for the fiftieth time!");
+  if (UserRecord.InteractionCount >= 50) createAchievement(45, "You just said something to this skill for the fiftieth time!");
 
   //ONE HUNDRED REQUESTS.
-  if (UserRecord.InteractionCount >= 100) createAchievement(046, "You just said something to this skill for the one hundreth time!");
+  if (UserRecord.InteractionCount >= 100) createAchievement(46, "You just said something to this skill for the one hundreth time!");
 
   //FIVE HUNDRED REQUESTS.
-  if (UserRecord.InteractionCount >= 500) createAchievement(047, "You just said something to this skill for the five hundreth time!");
+  if (UserRecord.InteractionCount >= 500) createAchievement(47, "You just said something to this skill for the five hundreth time!");
 
   //ONE THOUSAND REQUESTS.
-  if (UserRecord.InteractionCount >= 1000) createAchievement(048, "You just said something to this skill for the one thousandth time!  Congratulations!");
+  if (UserRecord.InteractionCount >= 1000) createAchievement(48, "You just said something to this skill for the one thousandth time!  Congratulations!");
+
+  //IF THE USER ONE-SHOT THE SKILL.  (NEW SESSION + INTENTREQUEST)
+  if ((handlerInput.requestEnvelope.session.new === true) && (handlerInput.requestEnvelope.request.type === "IntentRequest")) createAchievement(57, "You asked the skill to do something before it was opened.  This is called a one-shot request.  Nice work!");
 
   //MORNING
 
@@ -348,77 +284,139 @@ function CheckRequestAchievements(handlerInput)
 
   //EVENING
 
-  //SPECIFIC LOCALES
+  //SPECIFIC LOCALES & LANGUAGES
+  if (handlerInput.requestEnvelope.request.locale.includes("en-")) createAchievement(64, "You used this skill in English.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("de-")) createAchievement(65, "You used this skill in German.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("es-")) createAchievement(66, "You used this skill in Spanish.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("fr-")) createAchievement(67, "You used this skill in French.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("it-")) createAchievement(68, "You used this skill in Italian.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("ja-")) createAchievement(69, "You used this skill in Japanese.");
+  
+  if (handlerInput.requestEnvelope.request.locale.includes("pt-")) createAchievement(70, "You used this skill in Portuguese.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-DE")) createAchievement(71, "You used this skill in Germany.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-AU")) createAchievement(72, "You used this skill in Australia.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-CA")) createAchievement(73, "You used this skill in Canada.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-UK")) createAchievement(74, "You used this skill in the United Kingdom.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-IN")) createAchievement(75, "You used this skill in India.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-US")) createAchievement(76, "You used this skill in the United States.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-ES")) createAchievement(77, "You used this skill in Spain.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-MX")) createAchievement(78, "You used this skill in Mexico.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-FR")) createAchievement(79, "You used this skill in France.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-IT")) createAchievement(80, "You used this skill in Italy.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-JP")) createAchievement(81, "You used this skill in Japan.");
+
+  if (handlerInput.requestEnvelope.request.locale.includes("-BR")) createAchievement(82, "You used this skill in Brazil.");
 }
 
-function CheckDeviceAchievements(handlerInput)
-{
+async function CheckDeviceAchievements(handlerInput) {
   console.log("CHECKING DEVICE ACHIEVEMENTS");
+
+  if (UserRecord.DeviceIdList === undefined) UserRecord.DeviceIdList = handlerInput.requestEnvelope.context.System.device.deviceId;
+  else if (!UserRecord.DeviceIdList.includes(handlerInput.requestEnvelope.context.System.device.deviceId)) UserRecord.DeviceIdList += handlerInput.requestEnvelope.context.System.device.deviceId;
+  else createAchievement(63, "You used a device more than once.");
+
+  await UpdateDeviceIdList();
+
   //SECOND DEVICE
+  if ((UserRecord.DeviceIdList.match(/.device./g) || []).length === 2) createAchievement(58, "You used a second device with this skill.");
 
   //THIRD DEVICE
+  if ((UserRecord.DeviceIdList.match(/.device./g) || []).length === 3) createAchievement(59, "You used a third device with this skill.");
 
-  //FOUTH DEVICE
+  //FOURTH DEVICE
+  if ((UserRecord.DeviceIdList.match(/.device./g) || []).length === 4) createAchievement(60, "You used a fourth device with this skill.");
 
   //FIFTH DEVICE
+  if ((UserRecord.DeviceIdList.match(/.device./g) || []).length === 5) createAchievement(61, "You used a fifth device with this skill.");
 
   //TENTH DEVICE
+  if ((UserRecord.DeviceIdList.match(/.device./g) || []).length === 10) createAchievement(62, "You used a tenth device with this skill.");
 
   //RECTANGULAR SCREEN
+  if (handlerInput.requestEnvelope.context.Viewport.shape === "RECTANGLE") createAchievement(56, "You used a device with a rectangular screen.");
 
   //ROUND SCREEN
+  if (handlerInput.requestEnvelope.context.Viewport.shape === "ROUND") createAchievement(55, "You used a device with a round screen.");
   
   //NO SCREEN
+}
+
+async function UpdateDeviceIdList() {
+  console.log("UPDATING DEVICE ID LIST.");
+
+  var airtable = await new Airtable({apiKey: process.env.airtable_key}).base("appx5AkeU3qgwlYDn");
+  airtable('User').update(UserRecord.RecordId, {
+    DeviceIdList: UserRecord.DeviceIdList
+    }, function(err, record) {
+        if (err) { console.error(err); return; }
+    });
 }
 
 function CheckIntentAchievements(handlerInput)
 {
   if (handlerInput.requestEnvelope.request.type === "IntentRequest") {
     if (1 === 2) {}
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.CancelIntent") createAchievement(006, "You said cancel.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.FallbackIntent") createAchievement(007, "You said something we didn't anticipate.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent") createAchievement(008, "You asked for help.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOffIntent") createAchievement(009, "You asked for the loop to be off.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOnIntent") createAchievement(010, "You asked for the loop to be on.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.MoreIntent") createAchievement(011, "You asked for more.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateHomeIntent") createAchievement(012, "You asked to navigate home.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateSettingsIntent") createAchievement(013, "You asked to navigate to settings.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NextIntent") createAchievement(014, "You said next.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NoIntent") createAchievement(015, "You said no.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageDownIntent") createAchievement(016, "You said page down.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageUpIntent") createAchievement(017, "You said page up.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PauseIntent") createAchievement(018, "You said pause.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PreviousIntent") createAchievement(019, "You said previous.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.RepeatIntent") createAchievement(020, "You said repeat.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ResumeIntent") createAchievement(021, "You said resume.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollDownIntent") createAchievement(022, "You said scroll down.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollLeftIntent") createAchievement(023, "You said scroll left.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollRightIntent") createAchievement(024, "You said scroll right.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollUpIntent") createAchievement(025, "You said scroll up.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.SelectIntent") createAchievement(026, "You said select.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOffIntent") createAchievement(027, "You said shuffle off.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOnIntent") createAchievement(028, "You said shuffle on.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StartOverIntent") createAchievement(029, "You said start over.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StopIntent") createAchievement(030, "You said stop.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.YesIntent") createAchievement(031, "You said yes.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.CancelIntent") createAchievement(6, "You said 'cancel'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.FallbackIntent") createAchievement(7, "You said something we didn't anticipate.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent") createAchievement(8, "You said 'help'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOffIntent") createAchievement(9, "You said 'loop off'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.LoopOnIntent") createAchievement(10, "You said 'loop on'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.MoreIntent") createAchievement(11, "You said 'more'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateHomeIntent") createAchievement(12, "You said 'navigate home'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NavigateSettingsIntent") createAchievement(13, "You 'navigate settings'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NextIntent") createAchievement(14, "You said 'next'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.NoIntent") createAchievement(15, "You said 'no'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageDownIntent") createAchievement(16, "You said 'page down'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PageUpIntent") createAchievement(17, "You said 'page up'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PauseIntent") createAchievement(18, "You said 'pause'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.PreviousIntent") createAchievement(19, "You said 'previous'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.RepeatIntent") createAchievement(20, "You said 'repeat'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ResumeIntent") createAchievement(21, "You said 'resume'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollDownIntent") createAchievement(22, "You said 'scroll down'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollLeftIntent") createAchievement(23, "You said 'scroll left'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollRightIntent") createAchievement(24, "You said 'scroll right'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ScrollUpIntent") createAchievement(25, "You said 'scroll up'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.SelectIntent") createAchievement(26, "You said 'select'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOffIntent") createAchievement(27, "You said 'shuffle off'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.ShuffleOnIntent") createAchievement(28, "You said 'shuffle on'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StartOverIntent") createAchievement(29, "You said 'start over'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StopIntent") createAchievement(30, "You said 'stop'.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.YesIntent") createAchievement(31, "You said 'yes'.");
 
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonActorIntent") createAchievement(032, "You said the name of an actor.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent") createAchievement(033, "You said the name of an administrative area.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent") createAchievement(034, "You said the name of an airline.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent") createAchievement(035, "You said the name of an airport.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAnimalIntent") createAchievement(036, "You said the name of an animal.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonArtistIntent") createAchievement(037, "You said the name of an artist.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAthleteIntent") createAchievement(038, "You said the name of an athlete.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAuthorIntent") createAchievement(039, "You said the name of an author.");
-    else if (handlerInput.requestEnvelope.request.intent.name === "AmazonBookIntent") createAchievement(040, "You said the name of a book.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonActorIntent") createAchievement(32, "You said the name of an actor.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent") createAchievement(33, "You said the name of an administrative area.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent") createAchievement(34, "You said the name of an airline.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent") createAchievement(35, "You said the name of an airport.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAnimalIntent") createAchievement(36, "You said the name of an animal.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonArtistIntent") createAchievement(37, "You said the name of an artist.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAthleteIntent") createAchievement(38, "You said the name of an athlete.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAuthorIntent") createAchievement(39, "You said the name of an author.");
+    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonBookIntent") createAchievement(40, "You said the name of a book.");
   }
 }
 
 async function createAchievement(achievementId, speechText)
 {
   if (IsAchievementIncomplete(achievementId)) {
-    console.log("CREATING ACHIEVEMENT");
+    console.log("USER COMPLETED ACHIEVEMENT " + getFieldName(achievementId) + ". '" + speechText + "'");
     AchievementSpeech += AchievementSound + "Achievement Unlocked: " + speechText + " ";
+    AchievementCardText += speechText + "\n";
     AchievementCount++;
     //TODO: RECORD THIS ACHIEVEMENT SOMEWHERE.
     var fieldName = getFieldName(achievementId);
@@ -432,7 +430,7 @@ async function createAchievement(achievementId, speechText)
           if (err) { console.error(err); return; }
       });
   }
-  else console.log("USER HAS ALREADY COMPLETED ACHIEVEMENT " + getFieldName(achievementId) + ".");
+  else console.log("USER HAS ALREADY COMPLETED ACHIEVEMENT " + getFieldName(achievementId) + ". '" + speechText + "'");
 }
 
 function getFieldName(achievementId) {
@@ -444,10 +442,7 @@ function getFieldName(achievementId) {
 
 function IsAchievementIncomplete(achievementId) {
   if (UserRecord[getFieldName(achievementId)] != undefined) return false;
-  else {
-    console.log("ACHIEVEMENT " + achievementId + " COMPLETED");
-    return true;
-  } 
+  else return true;
 }
 
 function RemoveSounds()
@@ -525,9 +520,11 @@ const RequestLog = {
     var userRecord = await GetUserRecord(handlerInput.requestEnvelope.session.user.userId);
     await console.log("USER RECORD = " + JSON.stringify(userRecord.fields));
     UserRecord = userRecord.fields;
-    await IncrementInteractionCount();
-    await IncrementSessionCount(handlerInput);
-    CheckForAchievements(handlerInput);
+    if (handlerInput.requestEnvelope.request.type != "SessionEndedRequest") {
+      await IncrementInteractionCount();
+      await IncrementSessionCount(handlerInput);
+      CheckForAchievements(handlerInput);
+    }
     return;
   }
 };
