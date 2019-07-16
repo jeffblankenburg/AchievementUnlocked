@@ -10,7 +10,7 @@
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "286ba27bf092edc7cd5d6ebb35a6944f"
+            "eTag": "36fed03b45ee15ececd4044f586b5edd"
           }
         },
         "lambda": [
@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-AchievementUnlocked-default",
             "handler": "index.handler",
-            "revisionId": "e824ed87-be30-43a9-a1f8-d413adfd8b47",
+            "revisionId": "94abe582-f2fb-4324-ac99-770318ec6b4e",
             "runtime": "nodejs8.10"
           }
         ]

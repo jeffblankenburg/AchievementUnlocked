@@ -6,6 +6,8 @@ const https = require('https');
 const Airtable = require('airtable');
 const dashbot = require('dashbot')(process.env.dashbot_key).alexa;
 
+
+
 const AchievementSound = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>"
 var AchievementSpeech = "";
 var AchievementCardText = "";  //TODO: WRITE A CARD WHEN THEY GET ANY ACHIEVEMENTS.
@@ -43,6 +45,28 @@ const HelpIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "AMAZON.HelpIntent"; },
   handle(handlerInput) {
     const speechText = AchievementSpeech + "In this skill, you can try saying anything you want. Try to unlock new achievements!";
+    
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
+  }
+};
+
+const DateIntentHandler = {
+  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "DateIntent"; },
+  handle(handlerInput) {
+    const speechText = AchievementSpeech + "Today's date is irrelevant.";
+    
+    handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+    if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+    return handlerInput.responseBuilder.getResponse();
+  }
+};
+
+const TimeIntentHandler = {
+  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "TimeIntent"; },
+  handle(handlerInput) {
+    const speechText = AchievementSpeech + "Time is a construct.";
     
     handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
     if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
@@ -251,8 +275,6 @@ function CheckSessionAchievements(handlerInput)
 function CheckRequestAchievements(handlerInput)
 {
   console.log("CHECKING REQUEST ACHIEVEMENTS");
-  //FIRST REQUEST
-  //if (UserRecord.InteractionCount >= 1) createAchievement(41, "You just had your first interaction with this skill. <say-as interpret-as='interjection'>booya</say-as>!");
 
   //FIVE TOTAL REQUESTS
   if (UserRecord.InteractionCount >= 5) createAchievement(42, "You just said something to this skill for the fifth time!");
@@ -399,7 +421,14 @@ function CheckIntentAchievements(handlerInput)
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.StopIntent") createAchievement(30, "You said 'stop'.");
     else if (handlerInput.requestEnvelope.request.intent.name === "AMAZON.YesIntent") createAchievement(31, "You said 'yes'.");
 
-    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonActorIntent") createAchievement(32, "You said the name of an actor.");
+    else if (handlerInput.requestEnvelope.request.intent.name === "DateIntent") createAchievement(41, "You asked me about a date.");
+    //TODO: Respond with the date that the user indicated.
+
+    else if (handlerInput.requestEnvelope.request.intent.name === "TimeIntent") createAchievement(32, "You asked me about a time.");
+    //TODO: Respond with the time that the user indicated.
+
+
+
     //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent") createAchievement(33, "You said the name of an administrative area.");
     //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent") createAchievement(34, "You said the name of an airline.");
     //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent") createAchievement(35, "You said the name of an airport.");
@@ -540,15 +569,8 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = dashbot.handler(skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    AmazonActorIntentHandler,
-    AmazonAdministrativeAreaIntentHandler,
-    AmazonAirlineIntentHandler,
-    AmazonAirportIntentHandler,
-    AmazonAnimalIntentHandler,
-    AmazonArtistIntentHandler,
-    AmazonAthleteIntentHandler,
-    AmazonAuthorIntentHandler,
-    AmazonBookIntentHandler,
+    DateIntentHandler,
+    TimeIntentHandler,
     ChangeVoiceIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,

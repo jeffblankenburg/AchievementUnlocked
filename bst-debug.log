@@ -1,0 +1,156 @@
+2019-07-16T14:20:54.988Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:20:54.991Z error: bst-test            Error: Locale must be defined either in the testing.json or the test file itself under the config element
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:125:17)
+    at Generator.next (<anonymous>)
+    at asyncGeneratorStep (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:1:130)
+    at _next (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:194)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:364
+    at new Promise (<anonymous>)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:3:97)
+    at TestRunner.runSuiteForLocale (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:209:35)
+    at TestRunner.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/skill-testing-ml/dist/lib/runner/TestRunner.js:110:29)
+    at Generator.next (<anonymous>)
+2019-07-16T14:23:18.651Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:23:18.655Z error: bst-test            Error: Cannot find module '/Users/jeffblan/GitHub/AchievementUnlocked/index.js' from 'ModuleInvoker.js'
+    at Resolver.resolveModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:230:17)
+    at Resolver._getVirtualMockPath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:361:14)
+    at Resolver._getAbsolutePath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:347:14)
+    at Resolver.getModuleID (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:319:31)
+    at Runtime._shouldMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:943:37)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:595:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:23:18.661Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:23:18.661Z error: bst-test            Error: Cannot find module '/Users/jeffblan/GitHub/AchievementUnlocked/index.js' from 'ModuleInvoker.js'
+    at Resolver.resolveModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:230:17)
+    at Resolver._getVirtualMockPath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:361:14)
+    at Resolver._getAbsolutePath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:347:14)
+    at Resolver.getModuleID (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:319:31)
+    at Runtime._shouldMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:943:37)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:595:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:23:18.662Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:23:18.662Z error: bst-test            Error: Cannot find module '/Users/jeffblan/GitHub/AchievementUnlocked/index.js' from 'ModuleInvoker.js'
+    at Resolver.resolveModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:230:17)
+    at Resolver._getVirtualMockPath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:361:14)
+    at Resolver._getAbsolutePath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:347:14)
+    at Resolver.getModuleID (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:319:31)
+    at Runtime._shouldMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:943:37)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:595:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:30:28.318Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:30:28.324Z error: bst-test            Error: Cannot find module '/Users/jeffblan/GitHub/AchievementUnlocked/index.js' from 'ModuleInvoker.js'
+    at Resolver.resolveModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:230:17)
+    at Resolver._getVirtualMockPath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:361:14)
+    at Resolver._getAbsolutePath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:347:14)
+    at Resolver.getModuleID (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:319:31)
+    at Runtime._shouldMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:943:37)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:595:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:30:28.333Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:30:28.333Z error: bst-test            Error: Cannot find module '/Users/jeffblan/GitHub/AchievementUnlocked/index.js' from 'ModuleInvoker.js'
+    at Resolver.resolveModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:230:17)
+    at Resolver._getVirtualMockPath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:361:14)
+    at Resolver._getAbsolutePath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:347:14)
+    at Resolver.getModuleID (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:319:31)
+    at Runtime._shouldMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:943:37)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:595:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:30:28.334Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:30:28.335Z error: bst-test            Error: Cannot find module '/Users/jeffblan/GitHub/AchievementUnlocked/index.js' from 'ModuleInvoker.js'
+    at Resolver.resolveModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:230:17)
+    at Resolver._getVirtualMockPath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:361:14)
+    at Resolver._getAbsolutePath (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:347:14)
+    at Resolver.getModuleID (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-resolve/build/index.js:319:31)
+    at Runtime._shouldMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:943:37)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:595:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:37:08.821Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:37:08.874Z error: bst-test            Error: YOU MUST SUPPLY AN API_KEY TO DASHBOT!
+    at Object.<anonymous>.module.exports (/Users/jeffblan/GitHub/AchievementUnlocked/lambda/custom/node_modules/dashbot/src/dashbot.js:19:11)
+    at Object.<anonymous> (/Users/jeffblan/GitHub/AchievementUnlocked/lambda/custom/index.js:7:17)
+    at Runtime._execModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:888:13)
+    at Runtime._loadModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:577:12)
+    at Runtime.requireModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:433:10)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:598:21)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:37:08.881Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:37:08.882Z error: bst-test            TypeError: lambdaFunction is not a function
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:31:27
+    at new Promise (<anonymous>)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeFunction (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:21:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:18:30)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+    at Object.next (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:13:53)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:7:71
+    at new Promise (<anonymous>)
+2019-07-16T14:37:08.882Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:37:08.883Z error: bst-test            TypeError: lambdaFunction is not a function
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:31:27
+    at new Promise (<anonymous>)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeFunction (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:21:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:18:30)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+    at Object.next (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:13:53)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:7:71
+    at new Promise (<anonymous>)
+2019-07-16T14:40:07.540Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:40:07.610Z error: bst-test            Error: YOU MUST SUPPLY AN API_KEY TO DASHBOT!
+    at Object.<anonymous>.module.exports (/Users/jeffblan/GitHub/AchievementUnlocked/lambda/custom/node_modules/dashbot/src/dashbot.js:19:11)
+    at Object.<anonymous> (/Users/jeffblan/GitHub/AchievementUnlocked/lambda/custom/index.js:7:17)
+    at Runtime._execModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:888:13)
+    at Runtime._loadModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:577:12)
+    at Runtime.requireModule (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:433:10)
+    at Runtime.requireModuleOrMock (/usr/local/lib/node_modules/bespoken-tools/node_modules/jest-runtime/build/index.js:598:21)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:17:29)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+2019-07-16T14:40:07.616Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:40:07.617Z error: bst-test            TypeError: lambdaFunction is not a function
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:31:27
+    at new Promise (<anonymous>)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeFunction (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:21:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:18:30)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+    at Object.next (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:13:53)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:7:71
+    at new Promise (<anonymous>)
+2019-07-16T14:40:07.618Z error: bst-test            Error using bst-test on Node: v10.15.3
+2019-07-16T14:40:07.618Z error: bst-test            TypeError: lambdaFunction is not a function
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:31:27
+    at new Promise (<anonymous>)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeFunction (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:21:16)
+    at Function.Object.<anonymous>.ModuleInvoker.invokeHandler (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/ModuleInvoker.js:18:30)
+    at LocalSkillInteractor.Object.<anonymous>.LocalSkillInteractor.invoke (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/LocalSkillInteractor.js:24:50)
+    at LocalSkillInteractor.<anonymous> (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:65:41)
+    at step (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:32:23)
+    at Object.next (/usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:13:53)
+    at /usr/local/lib/node_modules/bespoken-tools/node_modules/virtual-alexa/lib/src/impl/SkillInteractor.js:7:71
+    at new Promise (<anonymous>)

@@ -114,23 +114,51 @@
                   "name": "AMAZON.YesIntent",
                   "samples": []
               },
-            {
-              "name": "ChangeVoiceIntent",
-              "slots": [
+              {
+                "name": "ChangeVoiceIntent",
+                "slots": [
+                    {
+                        "name": "voice",
+                        "type": "Voice"
+                    }
+                ],
+                "samples": [
+                    "use polly voice {voice}",
+                    "switch voice to {voice}",
+                    "switch to {voice}",
+                    "change to {voice}",
+                    "change voice to {voice}",
+                    "{voice}"
+                ]
+              },
+              {
+                "name": "DateIntent",
+                "slots": [
                   {
-                      "name": "voice",
-                      "type": "Voice"
+                    "name": "date",
+                    "type": "AMAZON.DATE"
                   }
-              ],
-              "samples": [
-                  "use polly voice {voice}",
-                  "switch voice to {voice}",
-                  "switch to {voice}",
-                  "change to {voice}",
-                  "change voice to {voice}",
-                  "{voice}"
-              ]
-          }
+                ],
+                "samples": [
+                  "{date}",
+                  "what is {date}",
+                  "when is {date}"
+                ]
+              },
+              {
+                "name": "TimeIntent",
+                "slots": [
+                  {
+                    "name": "time",
+                    "type": "AMAZON.TIME"
+                  }
+                ],
+                "samples": [
+                  "{time}",
+                  "what is {time}",
+                  "when is {time}"
+                ]
+              }
           ],
           "types": [
             {
