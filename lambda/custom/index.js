@@ -6,8 +6,6 @@ const https = require('https');
 const Airtable = require('airtable');
 const dashbot = require('dashbot')(process.env.dashbot_key).alexa;
 
-
-
 const AchievementSound = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>"
 var AchievementSpeech = "";
 var AchievementCardText = "";  //TODO: WRITE A CARD WHEN THEY GET ANY ACHIEVEMENTS.
