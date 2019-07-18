@@ -50,6 +50,52 @@ const HelpIntentHandler = {
   }
 };
 
+const BuyIntentHandler = {
+  canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "BuyIntent"; },
+  async handle(handlerInput) {
+    const locale = handlerInput.requestEnvelope.request.locale;
+    const ms = handlerInput.serviceClientFactory.getMonetizationServiceClient();
+
+    return await ms.getInSkillProducts(locale).then(async function checkForProductAccess(result) {
+      const product = result.inSkillProducts.filter(record => record.referenceName === "ISPAchievement");
+
+      if (isEntitled(product, handlerInput))
+      {
+        const speechText = AchievementSpeech + "You have already purchased this product, and as much as we would like to sell it to you again, that feels unethical.  Try something else!";
+    
+        handlerInput.responseBuilder.speak(setVoice(speechText)).reprompt(setVoice(speechText));
+        if (AchievementCardText != "") handlerInput.responseBuilder.withStandardCard("ACHIEVEMENT UNLOCKED!", AchievementCardText, "https://achievementunlocked.s3.amazonaws.com/art/card_small_720x480.png", "https://achievementunlocked.s3.amazonaws.com/art/card_large_1200x800.png");
+        return handlerInput.responseBuilder.getResponse();
+      }
+      else {
+        RemoveSounds();
+        const upsellMessage = AchievementSpeech + setVoice("There is another achievement for actually buying a product.  Would you like to know more?");
+                    return handlerInput.responseBuilder
+                    .addDirective({
+                        type: 'Connections.SendRequest',
+                        name: 'Upsell',
+                        payload: {
+                        InSkillProduct: {
+                            productId: product[0].productId,
+                        },
+                        upsellMessage,
+                        },
+                        token: 'correlationToken',
+                    })
+                    .getResponse();
+      }
+    })
+  }
+};
+
+function isProduct(product) {
+  return product && product.length > 0;
+}
+
+function isEntitled(product, handlerInput) {
+  return isProduct(product) && product[0].entitled === 'ENTITLED';
+}
+
 const DateIntentHandler = {
   canHandle(handlerInput) { return handlerInput.requestEnvelope.request.type === "IntentRequest" && handlerInput.requestEnvelope.request.intent.name === "DateIntent"; },
   handle(handlerInput) {
@@ -197,7 +243,7 @@ function CheckForAchievements(handlerInput) {
   CheckRequestAchievements(handlerInput);
   CheckDeviceAchievements(handlerInput);
   CheckIntentAchievements(handlerInput);
-  if (AchievementCount > 5) RemoveSounds(handlerInput)
+  if (AchievementCount > 5) ReplaceSounds(handlerInput)
 }
 
 async function IncrementSessionCount(handlerInput) {
@@ -425,9 +471,8 @@ function CheckIntentAchievements(handlerInput)
     else if (handlerInput.requestEnvelope.request.intent.name === "TimeIntent") createAchievement(32, "You asked me about a time.");
     //TODO: Respond with the time that the user indicated.
 
+    else if (handlerInput.requestEnvelope.request.intent.name === "BuyIntent") createAchievement(33, "You asked me about buying something.");
 
-
-    //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAdministrativeAreaIntent") createAchievement(33, "You said the name of an administrative area.");
     //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirlineIntent") createAchievement(34, "You said the name of an airline.");
     //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAirportIntent") createAchievement(35, "You said the name of an airport.");
     //else if (handlerInput.requestEnvelope.request.intent.name === "AmazonAnimalIntent") createAchievement(36, "You said the name of an animal.");
@@ -472,11 +517,17 @@ function IsAchievementIncomplete(achievementId) {
   else return true;
 }
 
+function ReplaceSounds()
+{
+  console.log("REMOVING SOUNDS BECAUSE THERE ARE MORE THAN FIVE ACHIEVEMENTS.  SSML CAN'T HAVE MORE THAN 5 SOUND EFFECTS IN ONE RESPONSE.  ADDING ONE BACK AT THE BEGINNING ONLY.")
+  RemoveSounds();
+  AchievementSpeech = AchivementSound + AchievementSpeech;
+}
+
 function RemoveSounds()
 {
   console.log("REMOVING SOUNDS BECAUSE THERE ARE MORE THAN FIVE ACHIEVEMENTS.  SSML CAN'T HAVE MORE THAN 5 SOUND EFFECTS IN ONE RESPONSE.")
   AchievementSpeech = AchievementSpeech.split(AchievementSound).join("");
-  AchievementSpeech = AchievementSound + AchievementSpeech;
 }
 
 async function GetUserRecord(userId)
@@ -569,6 +620,7 @@ exports.handler = dashbot.handler(skillBuilder
     LaunchRequestHandler,
     DateIntentHandler,
     TimeIntentHandler,
+    BuyIntentHandler,
     ChangeVoiceIntentHandler,
     HelloWorldIntentHandler,
     HelpIntentHandler,

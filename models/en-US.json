@@ -158,6 +158,15 @@
                   "what is {time}",
                   "when is {time}"
                 ]
+              },
+              {
+                  "name": "BuyIntent",
+                  "samples": [
+                      "buy something",
+                      "what can I buy",
+                      "purchase",
+                      "purchase something"
+                  ]
               }
           ],
           "types": [

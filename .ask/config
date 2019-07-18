@@ -10,7 +10,7 @@
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "36fed03b45ee15ececd4044f586b5edd"
+            "eTag": "e59b2c24aac7d94c01b1f8892e2d67e8"
           }
         },
         "lambda": [
@@ -23,11 +23,19 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-AchievementUnlocked-default",
             "handler": "index.handler",
-            "revisionId": "94abe582-f2fb-4324-ac99-770318ec6b4e",
+            "revisionId": "da3d881f-f1c0-499b-a085-303c544452a2",
             "runtime": "nodejs8.10"
           }
         ]
-      }
+      },
+      "in_skill_products": [
+        {
+          "deploy_status": "Update",
+          "filePath": "isps/entitlement/ISPAchievement.json",
+          "productId": "amzn1.adg.product.661776cb-7100-4981-b47b-3e1b710f3c2b",
+          "eTag": "313c5903ecc5d63ea5dd2236d9772e51"
+        }
+      ]
     }
   }
 }

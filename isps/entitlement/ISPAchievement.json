@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "type": "ENTITLEMENT",
+  "referenceName": "ISPAchievement",
+  "publishingInformation": {
+    "locales": {
+      "en-US": {
+        "name": "In-Skill Purchase Achievement",
+        "summary": "This is the summary.",
+        "description": "This is the description.",
+        "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/b28e/dbdc09abacb34528a64cc738b2d05e63/APP_ICON?versionId=j0i0D0DvcNjMj.lBSLSPrs.Rzt_VtcNd&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190718T143048Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190718%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=2366359e7dbc8bcd1b8ed410063b32bbe22dd45af17b66e3c61e667a8b7227c3",
+        "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/9216/3e0172948d9544869eaf6889ce1e238c/APP_ICON_LARGE?versionId=T9KHS5ORPM.NW8Zcboo0_iIkhoF6A_3c&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190718T143048Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20190718%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=dd6b09978e8e0b58ca4e21f44085f15f73d155a50a196b438f058814b6c9e0d5",
+        "examplePhrases": [
+          "TODO: REPLACE THIS WITH SAMPLE UTTERANCE FOR HOW USERS WILL BUY OR INVOKE THIS PRODUCT - 'Alexa, buy product name'  Or 'Alexa, play product name'"
+        ],
+        "keywords": [
+          "TODO: REPLACE THIS WITH ARRAY OF KEYWORDS TO BE USED FOR SEARCH INDEXING THE PRODUCT"
+        ],
+        "customProductPrompts": {
+          "purchasePromptDescription": "This is the purchase prompt description.",
+          "boughtCardDescription": "This is the bought card description."
+        }
+      }
+    },
+    "distributionCountries": [
+      "US"
+    ],
+    "pricing": {
+      "amazon.com": {
+        "releaseDate": "2019-07-17T00:00Z",
+        "defaultPriceListing": {
+          "price": 0.99,
+          "currency": "USD"
+        }
+      }
+    },
+    "taxInformation": {
+      "category": "SOFTWARE"
+    }
+  },
+  "privacyAndCompliance": {
+    "locales": {
+      "en-US": {
+        "privacyPolicyUrl": "https://blankenblog.com/privacy-policy/"
+      }
+    }
+  },
+  "testingInstructions": "TODO: REPLACE THIS WITH TESTING INSTRUCTIONS FOR THE CERTIFICATION TEAM SO THEY KNOW HOW TO PURCHASE AND USE THIS PRODUCT",
+  "purchasableState": "PURCHASABLE"
+}
