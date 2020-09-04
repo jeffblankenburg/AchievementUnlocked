@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "airtable": "^0.6.0",
+    "airtable": "^0.7.2",
     "ask-sdk-core": "^2.0.0",
     "ask-sdk-model": "^1.0.0",
     "dashbot": "^10.4.1"
